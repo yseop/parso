@@ -770,6 +770,11 @@ public final class SasFileParser {
         long deletedMapOffset = bitOffset + currentPageDeletedPointer + alignCorrection
                 + (currentPageSubheadersCount * subheaderPointerLength)
                 + ((currentPageBlockCount - currentPageSubheadersCount) * sasFileProperties.getRowLength());
+
+        // fix IndexOutOfBoundsException
+        if (deletedMapOffset <= 0) {
+            return;
+        }
         List<byte[]> bytes = getBytesFromFile(new Long[] {deletedMapOffset},
             new Integer[] {(int) Math.ceil((currentPageBlockCount - currentPageSubheadersCount) / 8.0)});
 

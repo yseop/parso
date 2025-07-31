@@ -106,6 +106,7 @@ public final class SasFileParser {
         tmpMap.put(0xFCFFFFFFFFFFFFFFL, SubheaderIndexes.COLUMN_ATTRIBUTES_SUBHEADER_INDEX);
         tmpMap.put(0xFEFBFFFFFFFFFFFFL, SubheaderIndexes.FORMAT_AND_LABEL_SUBHEADER_INDEX);
         tmpMap.put(0xFEFFFFFFFFFFFFFFL, SubheaderIndexes.COLUMN_LIST_SUBHEADER_INDEX);
+        // Add 0xFFFFFFF8 to prevent uncompressed data from being incorrectly detected as compressed (AAC-36269)
         tmpMap.put((long) 0xFFFFFFF8, SubheaderIndexes.COLUMN_ATTRIBUTES_SUBHEADER_INDEX);
         SUBHEADER_SIGNATURE_TO_INDEX = Collections.unmodifiableMap(tmpMap);
     }
